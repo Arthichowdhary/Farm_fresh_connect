@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HarvestHub - Fresh Farm Products Direct to You</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-green: #2e7d32;
+            --light-green: #4caf50;
+            --dark-green: #1b5e20;
+            --cream: #f1f8e9;
+            --brown: #5d4037;
+            --gray: #333;
+            --light-gray: #f5f5f5;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--gray);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            font-size: 28px;
+            color: var(--primary-green);
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary-green);
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-green);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-container {
+            position: relative;
+            margin-right: 20px;
+        }
+
+        .search-container input {
+            padding: 10px 15px;
+            padding-right: 40px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            width: 250px;
+            font-size: 14px;
+        }
+
+        .search-container i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-icon i {
+            font-size: 24px;
+            color: var(--primary-green);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--light-green);
+            color: white;
+            font-size: 12px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 40px;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-green);
+        }
+
+        /* Benefits Section */
+        .benefits {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .benefit {
+            text-align: center;
+            padding: 20px;
+            max-width: 250px;
+        }
+
+        .benefit i {
+            font-size: 40px;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .benefit h3 {
+            margin-bottom: 10px;
+            color: var(--dark-green);
+        }
+
+        /* Categories Section */
+        .section-title {
+            text-align: center;
+            margin: 40px 0 30px;
+            color: var(--dark-green);
+            font-size: 28px;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .category {
+            flex-basis: 23%;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .category-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .category-content h3 {
+            margin-bottom: 10px;
+            color: var(--dark-green);
+        }
+
+        /* Products Section */
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .product {
+            flex-basis: 23%;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-content {
+            padding: 20px;
+        }
+
+        .product-content h3 {
+            margin-bottom: 10px;
+            color: var(--dark-green);
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .product-action {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .add-to-cart {
+            padding: 8px 15px;
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--dark-green);
+        }
+
+        /* Farmer Profiles */
+        .farmers {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .farmer {
+            flex-basis: 23%;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .farmer-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .farmer-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .farmer-content h3 {
+            margin-bottom: 10px;
+            color: var(--dark-green);
+        }
+
+        /* Subscription Plans */
+        .plans {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .plan {
+            flex-basis: 31%;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .plan h3 {
+            color: var(--dark-green);
+            margin-bottom: 15px;
+        }
+
+        .plan-price {
+            font-size: 28px;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .plan-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-green);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .footer-section {
+            flex-basis: 23%;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Cart Dropdown */
+        .cart-dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            width: 350px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            z-index: 101;
+        }
+
+        .cart-dropdown.active {
+            display: block;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+            margin-left: 15px;
+        }
+
+        .cart-item-name {
+            font-weight: 500;
+        }
+
+        .cart-item-price {
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+
+        .cart-item-remove {
+            color: #ff3d00;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .cart-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        /* Page Content */
+        .page-content {
+            display: none;
+            padding: 20px 0;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .category, .product, .farmer {
+                flex-basis: 48%;
+            }
+            
+            .plan {
+                flex-basis: 48%;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin: 20px 0;
+            }
+            
+            .search-container {
+                width: 100%;
+                margin: 0 0 20px 0;
+            }
+            
+            .search-container input {
+                width: 100%;
+            }
+            
+            .category, .product, .farmer, .plan, .footer-section {
+                flex-basis: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-seedling"></i>
+                    <h1>HarvestHub</h1>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li><a href="#" data-page="home">Home</a></li>
+                        <li><a href="#" data-page="shop">Shop</a></li>
+                        <li><a href="#" data-page="farmers">Farmers</a></li>
+                        <li><a href="#" data-page="about">About Us</a></li>
+                        <li><a href="#" data-page="contact">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Search for products...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    
+                    <div class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                        <div class="cart-dropdown" id="cartDropdown">
+                            <h3>Your Cart</h3>
+                            <div id="cartItems">
+                                <!-- Cart items will be added here -->
+                            </div>
+                            <div class="cart-total">
+                                <span>Total:</span>
+                                <span id="cartTotal">₹0.00</span>
+                            </div>
+                            <div class="cart-buttons">
+                                <button class="btn" style="background-color: #666;">View Cart</button>
+                                <button class="btn">Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home" class="page-content active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h2>Fresh Farm Products Direct to Your Doorstep</h2>
+                <p>Connect directly with local farmers for the freshest produce, dairy, grains, and more. Support sustainable agriculture while enjoying healthy, organic food.</p>
+                <a href="#" class="btn" data-page="shop">Shop Now</a>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="container">
+            <div class="benefits">
+                <div class="benefit">
+                    <i class="fas fa-truck"></i>
+                    <h3>Direct from Farmers</h3>
+                    <p>Cut out the middleman and get farm-fresh products</p>
+                </div>
+                <div class="benefit">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Fresh & Organic</h3>
+                    <p>100% natural, organic produce without chemicals</p>
+                </div>
+                <div class="benefit">
+                    <i class="fas fa-indian-rupee-sign"></i>
+                    <h3>Fair Pricing</h3>
+                    <p>Better prices for both farmers and customers</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="categories">
+                <div class="category" data-page="shop" data-category="vegetables">
+                    <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="category-content">
+                        <h3>Vegetables</h3>
+                        <a href="#" class="btn" style="padding: 8px 20px;">Explore</a>
+                    </div>
+                </div>
+                <div class="category" data-page="shop" data-category="fruits">
+                    <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1619566636858-adf3ef46400b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="category-content">
+                        <h3>Fruits</h3>
+                        <a href="#" class="btn" style="padding: 8px 20px;">Explore</a>
+                    </div>
+                </div>
+                <div class="category" data-page="shop" data-category="dairy">
+                    <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="category-content">
+                        <h3>Dairy</h3>
+                        <a href="#" class="btn" style="padding: 8px 20px;">Explore</a>
+                    </div>
+                </div>
+                <div class="category" data-page="shop" data-category="grains">
+                    <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="category-content">
+                        <h3>Grains & Pulses</h3>
+                        <a href="#" class="btn" style="padding: 8px 20px;">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="products">
+                <div class="product" data-name="Tomatoes" data-price="40" data-category="vegetables">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1561136594-7f68413baa99?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="product-content">
+                        <h3>Organic Tomatoes</h3>
+                        <p>Freshly picked, chemical-free tomatoes</p>
+                        <div class="product-price">₹40/kg</div>
+                        <div class="product-action">
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product" data-name="Potatoes" data-price="30" data-category="vegetables">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="product-content">
+                        <h3>Fresh Potatoes</h3>
+                        <p>Locally grown, high-quality potatoes</p>
+                        <div class="product-price">₹30/kg</div>
+                        <div class="product-action">
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product" data-name="Carrots" data-price="50" data-category="vegetables">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1445282768818-728615cc910a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="product-content">
+                        <h3>Organic Carrots</h3>
+                        <p>Sweet and crunchy, freshly harvested</p>
+                        <div class="product-price">₹50/kg</div>
+                        <div class="product-action">
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product" data-name="Onions" data-price="35" data-category="vegetables">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="product-content">
+                        <h3>Fresh Onions</h3>
+                        <p>Pungent and flavorful, perfect for cooking</p>
+                        <div class="product-price">₹35/kg</div>
+                        <div class="product-action">
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Farmer Profiles -->
+        <section class="container">
+            <h2 class="section-title">Meet Our Farmers</h2>
+            <div class="farmers">
+                <div class="farmer">
+                    <div class="farmer-img" style="background-image: url('https://images.unsplash.com/photo-1621351183012-e2f9972dd9bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="farmer-content">
+                        <h3>Rajesh Kumar</h3>
+                        <p>Organic vegetable farmer from Haryana</p>
+                        <p>"I believe in sustainable farming without chemicals"</p>
+                    </div>
+                </div>
+                <div class="farmer">
+                    <div class="farmer-img" style="background-image: url('https://images.unsplash.com/photo-1621351183012-e2f9972dd9bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="farmer-content">
+                        <h3>Priya Singh</h3>
+                        <p>Fruit orchard owner from Himachal</p>
+                        <p>"My family has been growing fruits for three generations"</p>
+                    </div>
+                </div>
+                <div class="farmer">
+                    <div class="farmer-img" style="background-image: url('https://images.unsplash.com/photo-1621351183012-e2f9972dd9bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="farmer-content">
+                        <h3>Vikram Patel</h3>
+                        <p>Dairy farmer from Gujarat</p>
+                        <p>"We treat our cows like family for the best quality milk"</p>
+                    </div>
+                </div>
+                <div class="farmer">
+                    <div class="farmer-img" style="background-image: url('https://images.unsplash.com/photo-1621351183012-e2f9972dd9bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="farmer-content">
+                        <h3>Ananya Reddy</h3>
+                        <p>Organic grains farmer from Karnataka</p>
+                        <p>"I'm committed to preserving traditional farming methods"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subscription Plans -->
+        <section class="container">
+            <h2 class="section-title">HarvestHub Subscription Plans</h2>
+            <div class="plans">
+                <div class="plan">
+                    <h3>Weekly Fresh Basket</h3>
+                    <div class="plan-price">₹599/week</div>
+                    <ul class="plan-features">
+                        <li>Seasonal vegetables (5-6 varieties)</li>
+                        <li>Fresh fruits (2-3 varieties)</li>
+                        <li>Free delivery</li>
+                        <li>Customization options</li>
+                    </ul>
+                    <a href="#" class="btn">Subscribe Now</a>
+                </div>
+                <div class="plan">
+                    <h3>Family Nutrition Box</h3>
+                    <div class="plan-price">₹999/week</div>
+                    <ul class="plan-features">
+                        <li>Large variety of vegetables (7-8 types)</li>
+                        <li>Assorted fruits (4-5 types)</li>
+                        <li>Farm fresh eggs</li>
+                        <li>Free delivery & customization</li>
+                    </ul>
+                    <a href="#" class="btn">Subscribe Now</a>
+                </div>
+                <div class="plan">
+                    <h3>Complete Healthy Living</h3>
+                    <div class="plan-price">₹1499/week</div>
+                    <ul class="plan-features">
+                        <li>All vegetables & fruits from family plan</li>
+                        <li>Organic dairy products</li>
+                        <li>Grains & pulses</li>
+                        <li>Free delivery & priority support</li>
+                    </ul>
+                    <a href="#" class="btn">Subscribe Now</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Shop Page -->
+    <div id="shop" class="page-content">
+        <div class="container">
+            <h2 class="section-title">Our Products</h2>
+            
+            <div class="categories">
+                <div class="category" data-category="vegetables">
+                    <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="category-content">
+                        <h3>Vegetables</h3>
+                    </div>
+                </div>
+                <div class="category" data-category="fruits">
+                    <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1619566636858-adf3ef46400b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="category-content">
+                        <h3>Fruits</h3>
+                    </div>
+                </div>
+                <div class="category" data-category="dairy">
+                    <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="category-content">
+                        <h3>Dairy</h3>
+                    </div>
+                </div>
+                <div class="category" data-category="grains">
+                    <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="category-content">
+                        <h3>Grains & Pulses</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="products" id="shop-products">
+                <!-- Products will be loaded here based on category -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Farmers Page -->
+    <div id="farmers" class="page-content">
+        <div class="container">
+            <h2 class="section-title">Our Farmers</h2>
+            <p class="section-subtitle">Get to know the hardworking people who grow your food</p>
+            
+            <div class="farmers">
+                <div class="farmer">
+                    <div class="farmer-img" style="background-image: url('https://images.unsplash.com/photo-1564466809058-b5a9c85aaf2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="farmer-content">
+                        <h3>Rajesh Kumar</h3>
+                        <p><strong>Location:</strong> Haryana</p>
+                        <p><strong>Specialty:</strong> Organic Vegetables</p>
+                        <p>"I believe in sustainable farming without chemicals. My farm has been certified organic for 5 years."</p>
+                    </div>
+                </div>
+                <div class="farmer">
+                    <div class="farmer-img" style="background-image: url('https://images.unsplash.com/photo-1577202214323-cb5d57cfd3d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="farmer-content">
+                        <h3>Priya Singh</h3>
+                        <p><strong>Location:</strong> Himachal Pradesh</p>
+                        <p><strong>Specialty:</strong> Fruits</p>
+                        <p>"My family has been growing fruits for three generations. We take pride in our sustainable farming practices."</p>
+                    </div>
+                </div>
+                <div class="farmer">
+                    <div class="farmer-img" style="background-image: url('https://images.unsplash.com/photo-1621351183012-e2f9972dd9bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="farmer-content">
+                        <h3>Vikram Patel</h3>
+                        <p><strong>Location:</strong> Gujarat</p>
+                        <p><strong>Specialty:</strong> Dairy</p>
+                        <p>"We treat our cows like family for the best quality milk. Our animals are free-range and grass-fed."</p>
+                    </div>
+                </div>
+                <div class="farmer">
+                    <div class="farmer-img" style="background-image: url('https://images.unsplash.com/photo-1627903019894-20d5fbb3bbfe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="farmer-content">
+                        <h3>Ananya Reddy</h3>
+                        <p><strong>Location:</strong> Karnataka</p>
+                        <p><strong>Specialty:</strong> Grains & Pulses</p>
+                        <p>"I'm committed to preserving traditional farming methods while incorporating modern sustainable practices."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page-content">
+        <div class="container">
+            <h2 class="section-title">About HarvestHub</h2>
+            
+            <div class="about-content">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="HarvestHub Mission" style="width: 100%; height: 400px; object-fit: cover; border-radius: 10px;">
+                </div>
+                
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <h3>Our Mission</h3>
+                    <p>HarvestHub was founded in 2020 with a simple mission: to create a direct connection between local farmers and consumers. We believe that everyone deserves access to fresh, healthy, and sustainably grown food, while farmers deserve fair compensation for their hard work.</p>
+                    
+                    <h3>Our Story</h3>
+                    <p>Our founder, Rohan Mehta, grew up visiting his grandparents' farm in Punjab. He saw firsthand the challenges farmers faced in getting their products to market and receiving fair prices. After studying agricultural economics, he created HarvestHub to bridge this gap using technology.</p>
+                    
+                    <h3>Our Impact</h3>
+                    <p>Since our launch, we've connected over 500 farmers with more than 10,000 customers across India. We've helped increase farmer incomes by an average of 30% while providing customers with fresher produce at lower prices than traditional retail channels.</p>
+                    
+                    <h3>Our Values</h3>
+                    <ul>
+                        <li><strong>Sustainability:</strong> We promote organic farming practices that protect our environment</li>
+                        <li><strong>Transparency:</strong> We believe you should know where your food comes from and how it's grown</li>
+                        <li><strong>Fairness:</strong> We ensure farmers receive fair compensation for their products</li>
+                        <li><strong>Quality:</strong> We deliver the freshest, highest-quality products directly from farm to table</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page-content">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            
+            <div class="contact-content">
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 40px;">
+                    <div style="flex-basis: 48%;">
+                        <h3>Get in Touch</h3>
+                        <p>Have questions about our products, farmers, or how our platform works? We're here to help!</p>
+                        
+                        <div style="margin-top: 30px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                                <i class="fas fa-map-marker-alt" style="font-size: 24px; color: var(--primary-green); margin-right: 15px;"></i>
+                                <div>
+                                    <h4>Address</h4>
+                                    <p>123 Farm Road, Agricultural Zone<br>Bengaluru, Karnataka 560001</p>
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                                <i class="fas fa-phone" style="font-size: 24px; color: var(--primary-green); margin-right: 15px;"></i>
+                                <div>
+                                    <h4>Phone</h4>
+                                    <p>+91 9876543210</p>
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                                <i class="fas fa-envelope" style="font-size: 24px; color: var(--primary-green); margin-right: 15px;"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <p>info@harvesthub.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="flex-basis: 48%;">
+                        <h3>Send us a Message</h3>
+                        <form>
+                            <div style="margin-bottom: 15px;">
+                                <input type="text" placeholder="Your Name" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px;">
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <input type="email" placeholder="Your Email" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px;">
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <input type="text" placeholder="Subject" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px;">
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <textarea placeholder="Your Message" rows="5" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+                            </div>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>Visit Our Farm Store</h3>
+                    <p>Come visit us at our flagship farm store in Bengaluru! We're open Monday-Saturday from 9am-6pm.</p>
+                    
+                    <div style="margin-top: 20px; height: 300px; background-color: #eee; border-radius: 10px; display: flex; justify-content: center; align-items: center;">
+                        <p>Map would be displayed here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>HarvestHub</h3>
+                    <p>Connecting farmers directly with consumers for fresh, sustainable, and affordable produce.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" data-page="home">Home</a></li>
+                        <li><a href="#" data-page="shop">Shop</a></li>
+                        <li><a href="#" data-page="farmers">Farmers</a></li>
+                        <li><a href="#" data-page="about">About Us</a></li>
+                        <li><a href="#" data-page="contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#" data-page="shop" data-category="vegetables">Vegetables</a></li>
+                        <li><a href="#" data-page="shop" data-category="fruits">Fruits</a></li>
+                        <li><a href="#" data-page="shop" data-category="dairy">Dairy</a></li>
+                        <li><a href="#" data-page="shop" data-category="grains">Grains & Pulses</a></li>
+                        <li><a href="#" data-page="shop" data-category="organic">Organic</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Farm Road, Agricultural Zone</li>
+                        <li><i class="fas fa-phone"></i> +91 9876543210</li>
+                        <li><i class="fas fa-envelope"></i> info@harvesthub.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 HarvestHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        document.querySelectorAll('a[data-page]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const pageId = this.getAttribute('data-page');
+                showPage(pageId);
+                
+                // If category is specified, filter products
+                const category = this.getAttribute('data-category');
+                if (category) {
+                    filterProducts(category);
+                }
+            });
+        });
+        
+        // Category click handling
+        document.querySelectorAll('.category').forEach(category => {
+            category.addEventListener('click', function() {
+                const page = this.getAttribute('data-page');
+                const categoryName = this.getAttribute('data-category');
+                
+                showPage(page);
+                filterProducts(categoryName);
+            });
+        });
+        
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        // Product data
+        const products = [
+            // Vegetables
+            { name: "Tomatoes", price: 40, category: "vegetables", image: "https://images.unsplash.com/photo-1561136594-7f68413baa99?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Freshly picked, chemical-free tomatoes" },
+            { name: "Potatoes", price: 30, category: "vegetables", image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Locally grown, high-quality potatoes" },
+            { name: "Carrots", price: 50, category: "vegetables", image: "https://images.unsplash.com/photo-1445282768818-728615cc910a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Sweet and crunchy, freshly harvested" },
+            { name: "Onions", price: 35, category: "vegetables", image: "https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Pungent and flavorful, perfect for cooking" },
+            { name: "Capsicum", price: 60, category: "vegetables", image: "https://images.unsplash.com/photo-1563565375092-549683aee6ad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Colorful and crunchy bell peppers" },
+            { name: "Beetroot", price: 45, category: "vegetables", image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Sweet, earthy, and nutrient-rich" },
+            { name: "Brinjal", price: 40, category: "vegetables", image: "https://images.unsplash.com/photo-1630445908170-100632f42b5f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Fresh purple brinjal, perfect for curries" },
+            { name: "Chillies", price: 70, category: "vegetables", image: "https://images.unsplash.com/photo-1611514888256-b001a5b27c3f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Spicy green chillies, add heat to your dishes" },
+            
+            // Fruits
+            { name: "Apples", price: 120, category: "fruits", image: "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Crisp and sweet, freshly harvested" },
+            { name: "Bananas", price: 50, category: "fruits", image: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Rich and creamy, perfect for snacks" },
+            { name: "Pomegranates", price: 100, category: "fruits", image: "https://images.unsplash.com/photo-1541344999736-9f38305f2b80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Juicy and antioxidant-rich" },
+            { name: "Mangoes", price: 150, category: "fruits", image: "https://images.unsplash.com/photo-1553279768-865429fa0078?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Sweet and juicy, the king of fruits" },
+            
+            // Dairy
+            { name: "Cheese", price: 200, category: "dairy", image: "https://images.unsplash.com/photo-1552767059-ce182eadf1f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Freshly made cheese from organic milk" },
+            { name: "Butter", price: 80, category: "dairy", image: "https://images.unsplash.com/photo-1589985270826-4b7fe135a9c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Creamy butter made from grass-fed cows" },
+            { name: "Cow Ghee", price: 500, category: "dairy", image: "https://images.unsplash.com/photo-1608248543828-6cd355c6bb13?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Pure desi ghee from traditional methods" },
+            { name: "Milk", price: 60, category: "dairy", image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Fresh organic milk, delivered daily" },
+            { name: "Paneer", price: 120, category: "dairy", image: "https://images.unsplash.com/photo-1598485240910-89cc1d4bba54?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Fresh homemade paneer for your recipes" },
+            
+            // Grains & Pulses
+            { name: "Wheat", price: 40, category: "grains", image: "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Organic whole wheat grains" },
+            { name: "Rice", price: 70, category: "grains", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "High-quality basmati rice" },
+            { name: "Lentils", price: 90, category: "grains", image: "https://images.unsplash.com/photo-1591450389675-4a606cf87592?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Protein-rich organic lentils" },
+            { name: "Chickpeas", price: 80, category: "grains", image: "https://images.unsplash.com/photo-1592155931584-901ac15763e3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80", description: "Nutritious chickpeas for your dishes" }
+        ];
+        
+        function filterProducts(category) {
+            const shopProducts = document.getElementById('shop-products');
+            shopProducts.innerHTML = '';
+            
+            const filteredProducts = products.filter(product => product.category === category);
+            
+            filteredProducts.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product';
+                productElement.setAttribute('data-name', product.name);
+                productElement.setAttribute('data-price', product.price);
+                productElement.setAttribute('data-category', product.category);
+                
+                productElement.innerHTML = `
+                    <div class="product-img" style="background-image: url('${product.image}');"></div>
+                    <div class="product-content">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <div class="product-price">₹${product.price}/kg</div>
+                        <div class="product-action">
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+                
+                shopProducts.appendChild(productElement);
+            });
+            
+            // Reattach event listeners to new add to cart buttons
+            attachAddToCartListeners();
+        }
+        
+        // Cart functionality
+        let cart = [];
+        const cartIcon = document.getElementById('cartIcon');
+        const cartDropdown = document.getElementById('cartDropdown');
+        const cartCount = document.querySelector('.cart-count');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        
+        // Toggle cart dropdown
+        cartIcon.addEventListener('click', function() {
+            cartDropdown.classList.toggle('active');
+        });
+        
+        // Add to cart buttons
+        function attachAddToCartListeners() {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const product = this.closest('.product');
+                    const name = product.dataset.name;
+                    const price = parseFloat(product.dataset.price);
+                    
+                    // Check if product already in cart
+                    const existingItem = cart.find(item => item.name === name);
+                    
+                    if (existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        cart.push({
+                            name: name,
+                            price: price,
+                            quantity: 1
+                        });
+                    }
+                    
+                    updateCart();
+                });
+            });
+        }
+        
+        // Initial attachment of event listeners
+        attachAddToCartListeners();
+        
+        // Update cart display
+        function updateCart() {
+            // Update cart count
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // Clear cart items
+            cartItems.innerHTML = '';
+            
+            // Add items to cart
+            let total = 0;
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name} (${item.quantity})</div>
+                        <div class="cart-item-price">₹${itemTotal.toFixed(2)}</div>
+                    </div>
+                    <div class="cart-item-remove" data-name="${item.name}">×</div>
+                `;
+                
+                cartItems.appendChild(cartItem);
+            });
+            
+            // Update total
+            cartTotal.textContent = `₹${total.toFixed(2)}`;
+            
+            // Add event listeners to remove buttons
+            const removeButtons = document.querySelectorAll('.cart-item-remove');
+            removeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const name = this.dataset.name;
+                    cart = cart.filter(item => item.name !== name);
+                    updateCart();
+                });
+            });
+        }
+        
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('keyup', function() {
+            const searchTerm = this.value.toLowerCase();
+            const products = document.querySelectorAll('.product');
+            
+            products.forEach(product => {
+                const name = product.dataset.name.toLowerCase();
+                if (name.includes(searchTerm)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
